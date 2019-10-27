@@ -1,15 +1,14 @@
-module Multiplier (
-input logic [3: 0] a, b,
-output logic [7: 0] y
-);
+module Multiplier #(parameter width = 4)
+(input logic [width - 1: 0] a, b,
+output logic [2*width - 1: 0] y );
 
-logic [3:0] ab[4];
-for (genvar i = 0; i < 4; i = i + 1)
+logic [2*width -1:0] ab[width -1: 0];
+for (genvar i = 0; i < width; i = i + 1)
 begin
-    assign ab[i] = {4{a[i]}} & b;
+    assign ab[i] = ({width{a[i]}} & b) << i;
 end
 
-assign y = ab[0] + (ab[1] << 1) + (ab[2] << 2) + (ab[3] << 3);
+assign y = ab.sum;
 
 endmodule
 
