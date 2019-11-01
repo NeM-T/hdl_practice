@@ -17,14 +17,7 @@ module alu #(parameter width = 16)
  mux2 #(width) mux_3(w1 & w2, w1 + w2, select[1], w3);
  mux2 #(width) mux_4(w3, ~w3, select[0], out);
  
- logic an[width-1: 0];
- assign an[0] = out[0] | out[1];
- for (genvar i = 1; i < width; i = i + 1)
- begin
-    assign an[i] = an[i-1] | out[i];
- end
- 
- assign zr = ~an[width-1];
+ assign zr = ~( | out[width-1: 0]);
  assign ng = out[width-1];
 endmodule
 
