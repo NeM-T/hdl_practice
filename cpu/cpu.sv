@@ -1,7 +1,8 @@
 module cpu(
 input logic [31:0] INST,
 input clk , 
-input reset);
+input reset, 
+output logic [31:0] out_cpu);
 
  //PC 
 logic [31:0] pc,  pc_4;
@@ -28,6 +29,7 @@ datamemmory dmem_cpu(INST_SW, INST_LW, clk, memory_addr, write_data, out_mem);
 
 pc <=(zero & INST_beq)? pc_4:pc_imm ;
 
+out_cpu <= out_mem;
 end
 endmodule
 
