@@ -14,7 +14,7 @@ logic [31:0] memory_addr, write_data, out_mem;
 
 
 decode decode_cpu(INST, clk, INST_ADD, INST_SUB, INST_OR, INST_AND,INST_beq, INST_LW, INST_SW);
-rd rd_cpu(INST[19:15], INST[24:20], INST[11:7]); 
+rd rd_cpu(INST[19:15], INST[24:20], INST[11:7], out_mem, INST_LW, clk, out1, out2); 
 alu alu_cpu(clk, INST_ADD, INST_SUB, INST_OR, INST_AND, INST_beq, out1, out2, zero, out_alu); 
 datamemmory dmem_cpu(INST_SW, INST_LW, clk, memory_addr, write_data, out_mem);
 
